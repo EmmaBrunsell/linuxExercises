@@ -1,1 +1,11 @@
 #!/bin/bash
+cat Property_TaxRoll.csv | grep "MADISON SCHOOLS" Property_TaxRoll.csv| cut -d "," -f7 | {
+    sum=0
+    count=0
+    while read value; do
+        sum=$((sum + value))
+        count=$((count + 1))
+      done
+    echo "Sum: $sum"
+    echo "Average: $((sum / count))"
+  }
