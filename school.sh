@@ -1,11 +1,20 @@
 #!/bin/bash
-cat Property_TaxRoll.csv | grep "MADISON SCHOOLS" Property_TaxRoll.csv| cut -d "," -f7 | {
+
+cat Property_Tax_Roll.csv \
+| grep "MADISON SCHOOLS" \
+| cut -d',' -f7 \
+| {
     sum=0
     count=0
-    while read value; do
+    while read -r value; do
         sum=$((sum + value))
         count=$((count + 1))
-      done
+    done
+
     echo "Sum: $sum"
-    echo "Average: $((sum / count))"
+    if [ "$count" -gt 0 ]; then
+      echo "Average: $((sum / count))"
+    else
+      echo "Average: N/A (no matching rows)"
+    fi
   }
